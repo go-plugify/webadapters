@@ -3,16 +3,23 @@ package gin
 import (
 	"context"
 	"fmt"
+	"io"
 	"reflect"
 	"runtime"
 	"strings"
 	"unsafe"
 
 	"github.com/gin-gonic/gin"
+	goplugify "github.com/go-plugify/go-plugify"
 )
 
 type HttpContext struct {
 	*gin.Context
+}
+
+func (ctx *HttpContext) Body() io.ReadCloser {
+	body, _ := ctx.Context.Request.GetBody()
+	return body
 }
 
 type HttpRouter struct {
@@ -31,7 +38,7 @@ func GetHttpRouterInterfaceCode() string {
 }`
 }
 
-func (p *HttpRouter) Add(route string, handler func(c *HttpContext)) {
+func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
 	p.engine.POST(route, func(c *gin.Context) {
 		handler(&HttpContext{Context: c})
 	})
