@@ -30,14 +30,6 @@ func NewHttpRouter(engine *gin.Engine) *HttpRouter {
 	return &HttpRouter{engine: engine}
 }
 
-func GetHttpRouterInterfaceCode() string {
-	return `type HttpRouter interface {
-	ReplaceHandler(method, path string, handler func(ctx context.Context)) error
-	GetHandler(method, path string) (func(ctx context.Context), error)
-	GetHandlerName(method, path string) (string, error)
-}`
-}
-
 func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
 	p.engine.POST(route, func(c *gin.Context) {
 		handler(&HttpContext{Context: c})
