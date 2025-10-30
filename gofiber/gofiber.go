@@ -56,6 +56,10 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.Send(objData)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return ctx.FormValue(key)
+}
+
 type HttpRouter struct {
 	app *fiber.App
 }

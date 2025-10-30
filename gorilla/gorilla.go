@@ -40,6 +40,10 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.w.Write(objData)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return ctx.r.PostFormValue(key)
+}
+
 type HttpRouter struct {
 	app *mux.Router
 }

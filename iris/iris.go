@@ -38,6 +38,10 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.Write(objData)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return ctx.Request().PostFormValue(key)
+}
+
 type HttpRouter struct {
 	app *iris.Application
 }

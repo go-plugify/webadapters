@@ -38,6 +38,10 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.Res.Write(objData)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return ctx.Req.PostFormValue(key)
+}
+
 type HttpRouter struct {
 	router *gear.Router
 }

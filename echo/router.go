@@ -31,6 +31,10 @@ func (ctx *HttpContext) Query(key string) string {
 	return ctx.QueryParam(key)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return ctx.FormValue(key)
+}
+
 func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.Response().Header().Set("Content-Type", "application/json")
 	ctx.Response().WriteHeader(code)

@@ -57,6 +57,10 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 	ctx.Write(objData)
 }
 
+func (ctx *HttpContext) PostForm(key string) string {
+	return string(ctx.FormValue(key))
+}
+
 type HttpRouter struct {
 	app *fasthttprouter.Router
 }
