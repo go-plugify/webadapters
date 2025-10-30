@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	"github.com/buaazp/fasthttprouter"
 	goplugify "github.com/go-plugify/go-plugify"
@@ -69,8 +70,8 @@ func NewHttpRouter(app *fasthttprouter.Router) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.POST(route, func(ctx *fasthttp.RequestCtx) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.app.Handle(strings.ToUpper(method), route, func(ctx *fasthttp.RequestCtx) {
 		handler(&HttpContext{RequestCtx: ctx})
 	})
 }

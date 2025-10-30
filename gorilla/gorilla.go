@@ -6,6 +6,7 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/gorilla/mux"
@@ -52,10 +53,10 @@ func NewHttpRouter(app *mux.Router) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	p.app.Handle(route, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		handler(&HttpContext{w: w, r: r})
-	})).Methods("POST")
+	})).Methods(strings.ToUpper(method))
 }
 
 func (p *HttpRouter) ReplaceHandler(method, path string, handler func(ctx context.Context)) error {

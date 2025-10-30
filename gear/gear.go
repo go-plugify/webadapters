@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/teambition/gear"
@@ -50,8 +51,8 @@ func NewHttpRouter(router *gear.Router) *HttpRouter {
 	return &HttpRouter{router: router}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.router.Post(route, func(ctx *gear.Context) error {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.router.Handle(strings.ToUpper(method), route, func(ctx *gear.Context) error {
 		handler(&HttpContext{Context: ctx})
 		return nil
 	})

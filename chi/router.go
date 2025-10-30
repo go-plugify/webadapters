@@ -52,8 +52,8 @@ func NewHttpRouter(mux *chi.Mux) *HttpRouter {
 	return &HttpRouter{mux: mux}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.mux.Post(route, func(w http.ResponseWriter, r *http.Request) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.mux.MethodFunc(method, route, func(w http.ResponseWriter, r *http.Request) {
 		handler(&HttpContext{w: w, r: r})
 	})
 }

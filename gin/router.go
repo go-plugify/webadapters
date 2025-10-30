@@ -30,8 +30,8 @@ func NewHttpRouter(engine *gin.Engine) *HttpRouter {
 	return &HttpRouter{engine: engine}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.engine.POST(route, func(c *gin.Context) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.engine.Handle(strings.ToUpper(method), route, func(c *gin.Context) {
 		handler(&HttpContext{Context: c})
 	})
 }

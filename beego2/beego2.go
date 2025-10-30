@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	"github.com/beego/beego/v2/server/web"
 	beegoCtx "github.com/beego/beego/v2/server/web/context"
@@ -47,10 +48,26 @@ func NewHttpRouter(app *web.HttpServer) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.Post(route, func(ctx *beegoCtx.Context) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	handlerFunc := func(ctx *beegoCtx.Context) {
 		handler(&HttpContext{Context: ctx})
-	})
+	}
+	switch strings.ToLower(method) {
+	case "get":
+		p.app.Get(route, handlerFunc)
+	case "post":
+		p.app.Post(route, handlerFunc)
+	case "put":
+		p.app.Put(route, handlerFunc)
+	case "delete":
+		p.app.Delete(route, handlerFunc)
+	case "patch":
+		p.app.Patch(route, handlerFunc)
+	case "head":
+		p.app.Head(route, handlerFunc)
+	case "options":
+		p.app.Options(route, handlerFunc)
+	}
 }
 
 func (p *HttpRouter) ReplaceHandler(method, path string, handler func(ctx context.Context)) error {

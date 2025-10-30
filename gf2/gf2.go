@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -50,8 +51,8 @@ func NewHttpRouter(app *ghttp.Server) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.BindHandler("POST:"+route, func(r *ghttp.Request) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.app.BindHandler(strings.ToUpper(method)+":"+route, func(r *ghttp.Request) {
 		handler(&HttpContext{Request: r})
 	})
 }

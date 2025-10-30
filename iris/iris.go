@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/kataras/iris/v12"
@@ -50,8 +51,8 @@ func NewHttpRouter(app *iris.Application) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.Post(route, func(ctx iris.Context) {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.app.Handle(strings.ToUpper(method), route, func(ctx iris.Context) {
 		handler(&HttpContext{Context: ctx})
 	})
 }

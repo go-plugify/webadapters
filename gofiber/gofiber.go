@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/gofiber/fiber/v2"
@@ -68,8 +69,8 @@ func NewHttpRouter(app *fiber.App) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.Post(route, func(c *fiber.Ctx) error {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.app.Add(strings.ToUpper(method), route, func(c *fiber.Ctx) error {
 		handler(&HttpContext{Ctx: c})
 		return nil
 	})

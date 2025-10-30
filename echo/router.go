@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/labstack/echo/v4"
@@ -50,8 +51,8 @@ func NewHttpRouter(echo *echo.Echo) *HttpRouter {
 	return &HttpRouter{echo: echo}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.echo.POST(route, func(c echo.Context) error {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	p.echo.Add(strings.ToUpper(method), route, func(c echo.Context) error {
 		handler(&HttpContext{Context: c})
 		return nil
 	})

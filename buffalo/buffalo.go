@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"mime/multipart"
+	"strings"
 
 	goplugify "github.com/go-plugify/go-plugify"
 	"github.com/gobuffalo/buffalo"
@@ -50,11 +51,27 @@ func NewHttpRouter(app *buffalo.App) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(route string, handler func(c goplugify.HttpContext)) {
-	p.app.POST(route, func(c buffalo.Context) error {
+func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+	handlerFunc := func(c buffalo.Context) error {
 		handler(&HttpContext{Context: c})
 		return nil
-	})
+	}
+	switch strings.ToLower(method) {
+	case "get":
+		p.app.GET(route, handlerFunc)
+	case "post":
+		p.app.POST(route, handlerFunc)
+	case "put":
+		p.app.PUT(route, handlerFunc)
+	case "delete":
+		p.app.DELETE(route, handlerFunc)
+	case "patch":
+		p.app.PATCH(route, handlerFunc)
+	case "head":
+		p.app.HEAD(route, handlerFunc)
+	case "options":
+		p.app.OPTIONS(route, handlerFunc)
+	}
 }
 
 func (p *HttpRouter) ReplaceHandler(method, path string, handler func(ctx context.Context)) error {
