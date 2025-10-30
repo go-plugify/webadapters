@@ -7,10 +7,9 @@ require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/gin-gonic/gin v1.11.0
 	github.com/go-chi/chi v1.5.5
-	github.com/go-plugify/go-plugify v0.0.0-20251023133744-f753ff66c9ae
+	github.com/go-plugify/go-plugify v0.0.0-20251028065253-79007b103c4f
 	github.com/gobuffalo/buffalo v1.1.3
 	github.com/gofiber/fiber/v2 v2.52.9
-	github.com/gogf/gf v1.16.9
 	github.com/gogf/gf/v2 v2.9.4
 	github.com/gorilla/mux v1.8.0
 	github.com/kataras/iris/v12 v12.2.11
@@ -31,7 +30,6 @@ require (
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/clbanning/mxj v1.8.5-0.20200714211355-ff02cfb8ea28 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -68,7 +66,6 @@ require (
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20240328165702-4d01890c35c0 // indirect
-	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/gorilla/handlers v1.5.1 // indirect
