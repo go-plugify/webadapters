@@ -12,35 +12,36 @@ import (
 )
 
 type HttpContext struct {
-	echo.Context
+	echoCtx echo.Context
+	context.Context
 }
 
 func (ctx *HttpContext) GetHeader(key string) string {
-	return ctx.Request().Header.Get(key)
+	return ctx.echoCtx.Request().Header.Get(key)
 }
 
 func (ctx *HttpContext) Body() io.ReadCloser {
-	return ctx.Request().Body
+	return ctx.echoCtx.Request().Body
 }
 
 func (ctx *HttpContext) FormFile(name string) (*multipart.FileHeader, error) {
-	_, file, err := ctx.Request().FormFile(name)
+	_, file, err := ctx.echoCtx.Request().FormFile(name)
 	return file, err
 }
 
 func (ctx *HttpContext) Query(key string) string {
-	return ctx.QueryParam(key)
+	return ctx.echoCtx.QueryParam(key)
 }
 
 func (ctx *HttpContext) PostForm(key string) string {
-	return ctx.FormValue(key)
+	return ctx.echoCtx.FormValue(key)
 }
 
 func (ctx *HttpContext) JSON(code int, obj any) {
-	ctx.Response().Header().Set("Content-Type", "application/json")
-	ctx.Response().WriteHeader(code)
+	ctx.echoCtx.Response().Header().Set("Content-Type", "application/json")
+	ctx.echoCtx.Response().WriteHeader(code)
 	objData, _ := json.Marshal(obj)
-	ctx.Response().Write(objData)
+	ctx.echoCtx.Response().Write(objData)
 }
 
 type HttpRouter struct {
@@ -53,7 +54,7 @@ func NewHttpRouter(echo *echo.Echo) *HttpRouter {
 
 func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	p.echo.Add(strings.ToUpper(method), route, func(c echo.Context) error {
-		handler(&HttpContext{Context: c})
+		handler(&HttpContext{echoCtx: c, Context: c.Request().Context()})
 		return nil
 	})
 }

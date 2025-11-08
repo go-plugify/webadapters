@@ -13,6 +13,7 @@ import (
 
 type HttpContext struct {
 	*ghttp.Request
+	context.Context
 }
 
 func (ctx *HttpContext) GetHeader(key string) string {
@@ -53,7 +54,7 @@ func NewHttpRouter(app *ghttp.Server) *HttpRouter {
 
 func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	p.app.BindHandler(strings.ToUpper(method)+":"+route, func(r *ghttp.Request) {
-		handler(&HttpContext{Request: r})
+		handler(&HttpContext{Request: r, Context: r.Context()})
 	})
 }
 

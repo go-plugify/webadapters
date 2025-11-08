@@ -40,6 +40,12 @@ func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpCont
 	})
 }
 
+func (p *HttpRouter) AddMiddleware(handler func(c goplugify.HttpContext)) {
+	p.engine.Use(func(ctx *gin.Context) {
+		handler(&HttpContext{Context: ctx})
+	})
+}
+
 func (p *HttpRouter) ReplaceHandler(method, path string, handler func(ctx context.Context)) error {
 	return ReplaceLastHandler(p.engine, method, path, func(c *gin.Context) {
 		handler(c)

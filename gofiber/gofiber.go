@@ -14,6 +14,7 @@ import (
 
 type HttpContext struct {
 	*fiber.Ctx
+	context.Context
 }
 
 func (ctx *HttpContext) GetHeader(key string) string {
@@ -71,7 +72,7 @@ func NewHttpRouter(app *fiber.App) *HttpRouter {
 
 func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	p.app.Add(strings.ToUpper(method), route, func(c *fiber.Ctx) error {
-		handler(&HttpContext{Ctx: c})
+		handler(&HttpContext{Ctx: c, Context: c.Context()})
 		return nil
 	})
 }

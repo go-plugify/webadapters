@@ -12,24 +12,25 @@ import (
 )
 
 type HttpContext struct {
-	*beegoCtx.Context
+	beegoCtx *beegoCtx.Context
+	context.Context
 }
 
 func (ctx *HttpContext) GetHeader(key string) string {
-	return ctx.Request.Header.Get(key)
+	return ctx.beegoCtx.Request.Header.Get(key)
 }
 
 func (ctx *HttpContext) Body() io.ReadCloser {
-	return ctx.Request.Body
+	return ctx.beegoCtx.Request.Body
 }
 
 func (ctx *HttpContext) FormFile(name string) (*multipart.FileHeader, error) {
-	_, file, err := ctx.Request.FormFile(name)
+	_, file, err := ctx.beegoCtx.Request.FormFile(name)
 	return file, err
 }
 
 func (ctx *HttpContext) Query(key string) string {
-	return ctx.Request.URL.Query().Get(key)
+	return ctx.beegoCtx.Request.URL.Query().Get(key)
 }
 
 func (ctx *HttpContext) JSON(code int, obj any) {
@@ -37,7 +38,7 @@ func (ctx *HttpContext) JSON(code int, obj any) {
 }
 
 func (ctx *HttpContext) PostForm(key string) string {
-	return ctx.Request.PostFormValue(key)
+	return ctx.beegoCtx.Request.PostFormValue(key)
 }
 
 type HttpRouter struct {
@@ -50,7 +51,7 @@ func NewHttpRouter(app *web.HttpServer) *HttpRouter {
 
 func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	handlerFunc := func(ctx *beegoCtx.Context) {
-		handler(&HttpContext{Context: ctx})
+		handler(&HttpContext{beegoCtx: ctx, Context: ctx.Request.Context()})
 	}
 	switch strings.ToLower(method) {
 	case "get":

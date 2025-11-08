@@ -15,6 +15,7 @@ import (
 type HttpContext struct {
 	w http.ResponseWriter
 	r *http.Request
+	context.Context
 }
 
 func (ctx *HttpContext) GetHeader(key string) string {
@@ -55,7 +56,7 @@ func NewHttpRouter(app *mux.Router) *HttpRouter {
 
 func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
 	p.app.Handle(route, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		handler(&HttpContext{w: w, r: r})
+		handler(&HttpContext{w: w, r: r, Context: r.Context()})
 	})).Methods(strings.ToUpper(method))
 }
 
