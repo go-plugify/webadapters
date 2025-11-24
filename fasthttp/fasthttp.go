@@ -70,7 +70,7 @@ func NewHttpRouter(app *fasthttprouter.Router) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.app.Handle(strings.ToUpper(method), route, func(ctx *fasthttp.RequestCtx) {
 		handler(&HttpContext{RequestCtx: ctx})
 	})

@@ -52,7 +52,7 @@ func NewHttpRouter(app *ghttp.Server) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.app.BindHandler(strings.ToUpper(method)+":"+route, func(r *ghttp.Request) {
 		handler(&HttpContext{Request: r, Context: r.Context()})
 	})

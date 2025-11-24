@@ -52,7 +52,7 @@ func NewHttpRouter(echo *echo.Echo) *HttpRouter {
 	return &HttpRouter{echo: echo}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.echo.Add(strings.ToUpper(method), route, func(c echo.Context) error {
 		handler(&HttpContext{echoCtx: c, Context: c.Request().Context()})
 		return nil

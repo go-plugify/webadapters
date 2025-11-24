@@ -51,7 +51,7 @@ func NewHttpRouter(app *buffalo.App) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	handlerFunc := func(c buffalo.Context) error {
 		handler(&HttpContext{Context: c})
 		return nil

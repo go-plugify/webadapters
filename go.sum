@@ -81,8 +81,8 @@ github.com/go-playground/universal-translator v0.18.1 h1:Bcnm0ZwsGyWbCzImXv+pAJn
 github.com/go-playground/universal-translator v0.18.1/go.mod h1:xekY+UJKNuX9WP91TpwSH2VMlDf28Uj24BCp08ZFTUY=
 github.com/go-playground/validator/v10 v10.27.0 h1:w8+XrWVMhGkxOaaowyKH35gFydVHOvC0/uWoy2Fzwn4=
 github.com/go-playground/validator/v10 v10.27.0/go.mod h1:I5QpIEbmr8On7W0TktmJAumgzX4CA1XNl4ZmDuVHKKo=
-github.com/go-plugify/go-plugify v0.0.0-20251028065253-79007b103c4f h1:mGfSvM2BXjLFI2mjC+1qgPqUi8LfR/4VmgZP6pRt6/0=
-github.com/go-plugify/go-plugify v0.0.0-20251028065253-79007b103c4f/go.mod h1:mo66xdqllW0wiWpaOBXxKPeifFxw2vPtYSTU4OwIH/w=
+github.com/go-plugify/go-plugify v0.0.0-20251107095714-4685a1b9601e h1:kIyjkwh8hS6hFnV8WPN63I0pNdxBlvyf/lg+FTHHKLM=
+github.com/go-plugify/go-plugify v0.0.0-20251107095714-4685a1b9601e/go.mod h1:M6cHwyJkR91sPiORUIFZ556M0dHVzPreatltLOqH5Ko=
 github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
 github.com/gobuffalo/buffalo v1.1.3 h1:c2QzSKCi1XlpmPa0v7zyKK6f2s6IUmNl3TfN+jid1CM=
 github.com/gobuffalo/buffalo v1.1.3/go.mod h1:fpBgRRf9Ug6fiMQbNSRhlSRxOVj1KGT8+fO6nyULz9U=
@@ -317,6 +317,8 @@ github.com/teambition/gear v1.27.3 h1:iWUOJYdBwxU+SZP5aZ2ZYR5FnRGmdgrMbbSpOCZo0g
 github.com/teambition/gear v1.27.3/go.mod h1:d3Nmr6rRPnH5lYSK33W9IDhsaxp/8n14vRrUZu9dP9c=
 github.com/teambition/trie-mux v1.5.2 h1:ALTagFwKZXkn1vfSRlODlmoZg+NMeWAm4dyBPQI6a8w=
 github.com/teambition/trie-mux v1.5.2/go.mod h1:0Woh4KOHSN9bkJ66eWmLs8ltrEKw+fnZbFaHFfbMrtc=
+github.com/traefik/yaegi v0.16.1 h1:f1De3DVJqIDKmnasUF6MwmWv1dSEEat0wcpXhD2On3E=
+github.com/traefik/yaegi v0.16.1/go.mod h1:4eVhbPb3LnD2VigQjhYbEJ69vDRFdT2HQNrXx8eEwUY=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.3.0 h1:Qd2W2sQawAfG8XSvzwhBeoGq71zXOC/Q1E9y/wUcsUA=

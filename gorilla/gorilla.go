@@ -54,7 +54,7 @@ func NewHttpRouter(app *mux.Router) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.app.Handle(route, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		handler(&HttpContext{w: w, r: r, Context: r.Context()})
 	})).Methods(strings.ToUpper(method))

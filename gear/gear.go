@@ -51,7 +51,7 @@ func NewHttpRouter(router *gear.Router) *HttpRouter {
 	return &HttpRouter{router: router}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.router.Handle(strings.ToUpper(method), route, func(ctx *gear.Context) error {
 		handler(&HttpContext{Context: ctx})
 		return nil

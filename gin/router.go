@@ -34,7 +34,7 @@ func (p *HttpRouter) NewHTTPContext(c context.Context) *HttpContext {
 	return &HttpContext{Context: c.(*gin.Context)}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.engine.Handle(strings.ToUpper(method), route, func(c *gin.Context) {
 		handler(&HttpContext{Context: c})
 	})

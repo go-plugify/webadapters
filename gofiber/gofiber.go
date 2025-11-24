@@ -70,7 +70,7 @@ func NewHttpRouter(app *fiber.App) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.app.Add(strings.ToUpper(method), route, func(c *fiber.Ctx) error {
 		handler(&HttpContext{Ctx: c, Context: c.Context()})
 		return nil

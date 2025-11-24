@@ -51,7 +51,7 @@ func NewHttpRouter(app *iris.Application) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	p.app.Handle(strings.ToUpper(method), route, func(ctx iris.Context) {
 		handler(&HttpContext{Context: ctx})
 	})

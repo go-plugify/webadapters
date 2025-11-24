@@ -49,7 +49,7 @@ func NewHttpRouter(app *web.HttpServer) *HttpRouter {
 	return &HttpRouter{app: app}
 }
 
-func (p *HttpRouter) Add(method, route string, handler func(c goplugify.HttpContext)) {
+func (p *HttpRouter) Add(method, route string, handler goplugify.Handler) {
 	handlerFunc := func(ctx *beegoCtx.Context) {
 		handler(&HttpContext{beegoCtx: ctx, Context: ctx.Request.Context()})
 	}
